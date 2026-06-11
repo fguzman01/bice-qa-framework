@@ -38,11 +38,11 @@
             <version>${webdrivermanager.version}</version>
         </dependency>
 
-        <!-- KARATE -->
+        <!-- KARATE - reemplaza la que tienes -->
         <dependency>
-            <groupId>io.karatelabs</groupId>
+            <groupId>com.intuit.karate</groupId>
             <artifactId>karate-junit5</artifactId>
-            <version>${karate.version}</version>
+            <version>1.4.0</version>
             <scope>test</scope>
         </dependency>
 
