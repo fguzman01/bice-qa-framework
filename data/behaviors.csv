@@ -1,0 +1,4 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"","Login ParaBank","Login con múltiples usuarios","0","0","1","0","0"
+"","Login ParaBank","Login exitoso con credenciales válidas","0","0","1","0","0"
+"","Login ParaBank","Login con credenciales inválidas","0","0","1","0","0"
