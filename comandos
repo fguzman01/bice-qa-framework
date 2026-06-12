@@ -1,0 +1,11 @@
+# Solo tests web
+mvn test -Dcucumber.filter.tags="@web"
+
+# Solo tests API de Karate
+mvn test -Dtest=KarateRunner
+
+# Solo Cucumber (web)
+mvn test -Dtest=CucumberRunner
+
+# Todos juntos
+mvn test

@@ -11,6 +11,7 @@
     <logger name="org.openqa.selenium" level="WARN"/>
     <logger name="org.openqa.selenium.devtools" level="OFF"/>
     <logger name="org.openqa.selenium.chromium" level="OFF"/>
+    <logger name="com.intuit.karate" level="INFO"/>
 
     <!-- Muestra solo lo importante del framework -->
     <logger name="com.bice" level="DEBUG"/>

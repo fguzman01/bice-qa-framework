@@ -1,3 +1,4 @@
+@web
 Feature: Login ParaBank
 
   Background:
