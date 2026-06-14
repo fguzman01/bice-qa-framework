@@ -1,0 +1,15 @@
+{
+
+"newCustomer":{
+    "name": "Felipe Test",
+    "addr": "Av. Providencia 123",
+    "city": "Santiago",
+    "state": "RM",
+    "pinno": "7500000",
+    "telephoneno": "+56912345678",
+    "emailid": "felipe.test@example.com",
+    "dob": "1990-05-15",
+    "password": "Test1234"
+  }
+
+}
