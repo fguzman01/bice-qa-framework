@@ -52,7 +52,7 @@ public class LoginPage extends BasePage {
         try {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             String message = alert.getText();
-            Thread.sleep(2000); // 2 segundos para verlo
+            Thread.sleep(500); // 2 segundos para verlo
             alert.accept();
             return message;
         } catch (Exception e) {
