@@ -18,7 +18,7 @@ public class LoginSteps {
     private LoginFlow loginFlow;
     private LoginPage loginPage;
 
-    // Instanciar flos previo
+    // Instanciar flows  previo
     @Before
     public void setUp() {
         WebDriverFactory.initDriver();
