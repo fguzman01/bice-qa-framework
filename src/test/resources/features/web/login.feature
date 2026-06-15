@@ -1,26 +1,39 @@
 @web
-Feature: Login ParaBank
+Feature: Login Sauce demo
 
   Background:
     Given el usuario navega al login
 
   Scenario: Login exitoso con credenciales válidas
-    When ingresa usuario "mngr662929" y password "AqYgEzY"
-    Then debe ver la página de cuentas
-
-  Scenario Outline: Login con múltiples usuarios
     When ingresa usuario "<usuario>" y password "<password>"
-    Then debe ver la página de cuentas
+    Then debe ver la pagina de productos
 
-    Examples:
-      | usuario    | password |
-      | mngr662929 | AqYgEzY  |
-      | mngr662968 | AnYbYpU  |
+    Examples: 
+      | usuario       | password     |
+      | standard_user | secret_sauce |
 
-  Scenario: Login con credenciales inválidas
-    When ingresa usuario "mngr662929" y password "wrongpass"
-    Then debe ver un mensaje de error
+  Scenario: Login fallido con passwor vacia
+    When ingresa usuario "<usuario>" y password "<password>"
+    Then debe entregar error por falta de datos
 
-  Scenario: Login con usuario invalido desde DataProvider
-    When el usuario invalido intenta ingresar
-    Then debe ver un mensaje de error
+    Examples: 
+      | usuario       | password |
+      | standard_user |          |
+
+
+  Scenario: Login fallido con passwor incorrecta
+    When ingresa usuario "<usuario>" y password "<password>"
+    Then debe entregar error por password incorrecto
+
+    Examples: 
+      | usuario       | password        |
+      | standard_user | wrong_password  |
+
+
+   Scenario: Login fallido por  usuario bloqueado
+    When ingresa usuario "<usuario>" y password "<password>"
+    Then debe entregar error por usuario bloqueado
+
+    Examples: 
+      | usuario         | password      |
+      | locked_out_user | secret_sauce  |

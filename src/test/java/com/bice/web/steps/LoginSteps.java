@@ -41,31 +41,38 @@ public class LoginSteps {
     }
 
     @When("ingresa usuario {string} y password {string}")
-    public void ingresaUsuarioYPassword(String username, String password) {
+    public void ingresarUsuarioYPassword(String username, String password){
         loginFlow.loginAs(username, password);
     }
 
-    @When ("el usuario invalido intenta ingresar")
-    public void elUsuarioInvalidoIntentaIngresar(){
-        //Instancia data provider
-        UserData user = DataProvider.getUser("invalidUser");
-        System.out.println("[DATA] Usuario desde JSON: " + user.getUsername());
-        loginFlow.loginAs(user.getUsername(), user.getPassword());
+    @Then("debe ver la pagina de productos")
+    public void debeVerPaginaDeProductos (){
+        assert loginPage.isLoginSuccessful()
+         : "Nose mostro textile prodcuts";
+    }
 
+    @Then("debe entregar error por falta de datos")
+    public void debeEntregarErrorPorFaltaDeDatos(){
+        assert loginPage.isErrorMessageDisplayed("Password is required") 
+        : "No se mostró el mensaje de password requerido";
+    }
+
+    @Then("debe entregar error por password incorrecto")
+    public void debeENtregarPassWordIncorrecta(){
+        assert loginPage.isErrorMessageDisplayed("do not match") 
+            : "No se mostró el mensaje de credenciales inválidas";
+    }
+
+    @Then("debe entregar error por usuario bloqueado")
+    public void debeEntregarErrorPorUsuarioBloqueado() {
+        assert loginPage.isErrorMessageDisplayed("locked out") 
+        : "No se mostró el mensaje de usuario bloqueado";
     }
 
 
-    @Then("debe ver la página de cuentas")
-    public void debeVerLaPaginaDeCuentas() {
-        assert loginPage.isLoginSuccessful() 
-            : "Se esperaba mensaje de bienvenida pero no apareció";
-    }
 
-    @Then("debe ver un mensaje de error")
-    public void debeVerUnMensajeDeError() {
-        String alertMsg = loginPage.getAlertMessage();
-        assert alertMsg.contains("not valid") 
-            : "Se esperaba 'not valid' pero se obtuvo: " + alertMsg;
-}
+
+
+    
     
 }

@@ -15,19 +15,13 @@ public class LoginFlow {
     // Metodo de login completo
     public void loginAs(String username, String password){
         System.out.println("[FLOW] Iniciando login con usuario: " + username);
-        loginPage.enterUsername(username);
-        loginPage.enterPassword(password);
-        loginPage.clickLogin();
-
-        if (!loginPage.isAlertPresent()) {
-            loginPage.takeScreenshot("LOGIN_COMPLETADO_" + username);
-        }
+        loginPage.inputUsername(username);
+        loginPage.inputPassword(password);
+        loginPage.clickLoginButton();
         System.out.println("[FLOW] Login completado");
+
     }
 
-    //Instancia de datos a ocupar
-    public void loginWithDefaultUser() {
-        loginAs("john", "demo");
-    }
+    
     
 }

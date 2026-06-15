@@ -2,7 +2,9 @@ package com.bice.pages;
 
 import com.bice.config.ConfigManager;
 import com.bice.config.WebDriverFactory;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.time.Duration;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -72,10 +74,12 @@ public abstract class BasePage {
         }
     }
 
-    // Metodo generico para revisar display de elemento
+    // Método genérico para revisar display de elemento con timeout corto
     protected boolean isDisplayed(WebElement element) {
         try {
-            return element.isDisplayed();
+            WebElement visibleElement = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOf(element));
+            return visibleElement.isDisplayed();
         } catch (Exception e) {
             return false;
         }

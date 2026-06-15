@@ -7,69 +7,67 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(name = "uid")
-    private WebElement userField;
+    
 
-    @FindBy(name = "password")
-    private WebElement passwordField;
+    @FindBy(id ="password")
+    private WebElement password;
 
-    @FindBy(name = "btnLogin")
+    @FindBy(id = "login-button")
     private WebElement loginButton;
 
-    @FindBy(xpath = "//marquee[contains(text(),'Welcome To Manager')]")
-    private WebElement welcomeMessage;
+    @FindBy(xpath = "//input[@id='user-name']")
+    private WebElement userName;
 
+
+    @FindBy (xpath = "//*[text()='Products']")
+    private WebElement productTitle;
+
+    @FindBy(xpath = "//h3[@data-test='error']")
+    private WebElement errorMessage;
+
+    
     public LoginPage() {
         super();
     }
 
-    //Ingresar username
-    public void enterUsername(String username) {
-        typeText(userField, username);
+    //Inpunt user name 
+    public void inputUsername (String username){
+        typeText(this.userName, username);
     }
 
-    // Ingresar contraseña
-    public void enterPassword(String password) {
-        typeText(passwordField, password);
+    //Inpunt user name 
+    public void inputPassword (String pass){
+        typeText(this.password, pass);
     }
 
-    // Click boton del login
-    public void clickLogin() {
+    // Ingresar click login
+    public void clickLoginButton (){
         clickElement(loginButton);
     }
+     
+     // ── Métodos de validación ─────────────────────────────────────────
 
-    //Valida login exitoso
-    public boolean isLoginSuccessful() {
+
+    //Validación pagina producto luego de login
+    public boolean isLoginSuccessful(){
+        return isDisplayed(productTitle);
+    }
+
+    public String getErrorMessage() {
+    return getText(errorMessage);
+    }
+
+    public boolean isErrorMessageDisplayed(String expectedText) {
         try {
-            return isDisplayed(welcomeMessage);
+            String actual = getErrorMessage();
+            System.out.println("[CHECK] Mensaje de error: " + actual);
+            return actual.contains(expectedText);
         } catch (Exception e) {
             return false;
         }
     }
 
-    //Captura alerta al fallar login
-    public String getAlertMessage() {
-        try {
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-            String message = alert.getText();
-            Thread.sleep(2000); // 2 segundos para verlo
-            alert.accept();
-            return message;
-        } catch (Exception e) {
-            return "";
-        }
-    }
+    
 
-    public boolean isAlertPresent() {
-        try {
-            driver.switchTo().alert();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean isLoginPageDisplayed() {
-        return isDisplayed(userField);
-    }
+    
 }
