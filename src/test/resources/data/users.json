@@ -1,14 +1,10 @@
 {
   "validUser": {
-    "username": "mngr662929",
-    "password": "AqYgEzY"
+    "username": "standard_user",
+    "password": "secret_sauce"
   },
-  "validUser2": {
-    "username": "mngr662968",
-    "password": "AnYbYpU"
-  },
-  "invalidUser": {
-    "username": "mngr662929",
-    "password": "wrongpass"
+  "lockerUser": {
+    "username": "locked_out_user",
+    "password": "secret_sauce"
   }
 }

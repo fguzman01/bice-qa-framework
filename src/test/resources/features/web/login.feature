@@ -37,3 +37,8 @@ Feature: Login Sauce demo
     Examples: 
       | usuario         | password      |
       | locked_out_user | secret_sauce  |
+
+
+   Scenario: Login exitoso con usuario desde DataProvider
+     When el usuario valido desde DataProvider intenta ingresar
+     Then debe ver la pagina productos

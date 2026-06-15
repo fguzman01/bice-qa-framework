@@ -1,16 +1,22 @@
 function fn() {
     var env = karate.env || 'dev';
+
+   
     
     var config = {
-        apiBaseUrl: 'https://reqres.in/api',
-        apiKey: 'free_user_3EY53Y6P0ViM05wYnAJMrsie8vh'
+        apiBaseUrl: 'https://jsonplaceholder.typicode.com'
     };
+    
+    // var config = {
+    //     apiBaseUrl: 'https://reqres.in/api',
+    //     apiKey: 'free_user_3EY53Y6P0ViM05wYnAJMrsie8vh'
+    // };
 
-    if (env === 'qa') {
-        config.apiBaseUrl = 'https://reqres.in/api'; // cambiar por QA cuando exista
-    }
+    // if (env === 'qa') {
+    //     config.apiBaseUrl = 'https://reqres.in/api'; // cambiar por QA cuando exista
+    // }
 
-    karate.configure('headers', { 'x-api-key': config.apiKey });
+    // karate.configure('headers', { 'x-api-key': config.apiKey });
 
     return config;
 }

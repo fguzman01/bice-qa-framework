@@ -45,6 +45,13 @@ public class LoginSteps {
         loginFlow.loginAs(username, password);
     }
 
+    @When ("el usuario valido desde DataProvider intenta ingresar")
+    public void elUsuarioValidoDesdeDataProviderIntentaIngresar(){
+        UserData user = DataProvider.getUser("validUser");
+        System.out.println("[DATA] Usuario desde JSON: " + user.getUsername());
+        loginFlow.loginAs(user.getUsername(),user.getPassword());
+    }
+
     @Then("debe ver la pagina de productos")
     public void debeVerPaginaDeProductos (){
         assert loginPage.isLoginSuccessful()
@@ -68,6 +75,7 @@ public class LoginSteps {
         assert loginPage.isErrorMessageDisplayed("locked out") 
         : "No se mostró el mensaje de usuario bloqueado";
     }
+
 
 
 
