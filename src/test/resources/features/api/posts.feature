@@ -49,5 +49,23 @@ Feature: Posts y Comments API - JSONPlaceholder
         * print 'Respuesta' + response
         * print 'Post eliminado'
 
+    @schemaValidation
+    Scenario: Validar schema de post
+        Given url apiBaseUrl + '/posts/1'
+        When method GET
+        Then status 200
+        * print 'Response', response
+        And match response ==
+        """
+        {
+            userId: '#number',
+            id: '#number',
+            title: '#string',
+            body: '#string'
+        }
+        """
+
+    
+
 
    
