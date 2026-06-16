@@ -7,3 +7,7 @@ Feature: Products SauceDemo
 
     Scenario: Listar todos los productos con su precio
         Then se deben listar todos los productos disponibles
+
+    Scenario: Agregar producto específico al carrito
+        When busca el producto "Sauce Labs Onesie" y lo agrega al carrito
+        Then el carrito debe tener 1 producto

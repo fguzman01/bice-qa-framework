@@ -32,7 +32,7 @@ public class LoginSteps {
         if (scenario.isFailed()) {
         loginPage.takeScreenshot("FAIL_" + scenario.getName());
         }
-        WebDriverFactory.quitDriver();
+        //WebDriverFactory.quitDriver();
     }
 
     @Given("el usuario navega al login")

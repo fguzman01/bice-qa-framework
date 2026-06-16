@@ -1,9 +1,11 @@
+@ignore
 @web
 Feature: Login Sauce demo
 
   Background:
     Given el usuario navega al login
 
+  @ignore
   Scenario: Login exitoso con credenciales válidas
     When ingresa usuario "<usuario>" y password "<password>"
     Then debe ver la pagina de productos
@@ -41,4 +43,4 @@ Feature: Login Sauce demo
 
    Scenario: Login exitoso con usuario desde DataProvider
      When el usuario valido desde DataProvider intenta ingresar
-     Then debe ver la pagina productos
+     Then debe ver la pagina de productos

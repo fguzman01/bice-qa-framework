@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class WebDriverFactory {
 
@@ -53,14 +56,27 @@ public class WebDriverFactory {
 
     // Creación driver segun opción no-headless - headless
     private static WebDriver createChrome(boolean headless) {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        if (headless) {
-            options.addArguments("--headless=new");
-        }
-        options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
-        return new ChromeDriver(options);
+    WebDriverManager.chromedriver().setup();
+    ChromeOptions options = new ChromeOptions();
+    if (headless) {
+        options.addArguments("--headless=new");
     }
+    options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+    options.addArguments(
+        "--disable-features=PasswordLeakDetection,PasswordManagerEnableLeakDetectionForUsersConsumer,AutofillServerCommunication"
+    );
+
+    Map<String, Object> prefs = new HashMap<>();
+    prefs.put("credentials_enable_service", false);
+    prefs.put("profile.password_manager_enabled", false);
+    prefs.put("profile.password_manager_leak_detection", false);
+    prefs.put("password_manager_leak_detection", false);
+    options.setExperimentalOption("prefs", prefs);
+
+    options.addArguments("--disable-save-password-bubble");
+
+    return new ChromeDriver(options);
+ }
 
 
 }
