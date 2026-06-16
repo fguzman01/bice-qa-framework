@@ -64,6 +64,22 @@ Feature: Posts y Comments API - JSONPlaceholder
             body: '#string'
         }
         """
+    @chainedCalls
+    Scenario: Obtener post y luego sus comentarios
+        # Paso 1 : obtener el post
+        Given url apiBaseUrl + '/posts/1'
+        When method GET
+        Then status 200
+        * def postId = response.id
+        * print 'Post obtenido con id', postId
+
+        # Paso 1 : obtener el post
+        Given url apiBaseUrl + '/comments'
+        And param postId = postId
+        When method GET
+        Then status 200
+         * print 'Comentarios encontrados:', response.length
+        And match each response[*].postId == postId
 
     
 
