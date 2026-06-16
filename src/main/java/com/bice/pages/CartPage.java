@@ -2,11 +2,19 @@ package com.bice.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class CartPage extends BasePage{
 
+    @FindBy(css = "[data-test='checkout']")
+    private WebElement checkoutButton;
+
     public CartPage(){
         super();
+    }
+
+    public void clickCheckout() {
+        clickElement(checkoutButton);
     }
 
 
