@@ -45,27 +45,26 @@ public class LoginSteps {
         loginFlow.loginAs(username, password);
     }
 
-    @When ("el usuario invalido intenta ingresar")
-    public void elUsuarioInvalidoIntentaIngresar(){
-        //Instancia data provider
-        UserData user = DataProvider.getUser("invalidUser");
-        System.out.println("[DATA] Usuario desde JSON: " + user.getUsername());
-        loginFlow.loginAs(user.getUsername(), user.getPassword());
-
-    }
-
-
-    @Then("debe ver la página de cuentas")
+    
+    @Then("debe ver la pagina de login succes")
     public void debeVerLaPaginaDeCuentas() {
-        assert loginPage.isLoginSuccessful() 
+        assert loginPage.isLoginSuccesful()
             : "Se esperaba mensaje de bienvenida pero no apareció";
     }
 
-    @Then("debe ver un mensaje de error")
-    public void debeVerUnMensajeDeError() {
-        String alertMsg = loginPage.getAlertMessage();
-        assert alertMsg.contains("not valid") 
-            : "Se esperaba 'not valid' pero se obtuvo: " + alertMsg;
-}
+    @When("el usuario valido desde DataProvider intenta ingresar")
+    public void loginConDataProvider(){
+        UserData user = DataProvider.getUser("validUser");
+        System.out.println("[DATA] Usuario desde JSON: " + user.getUsername());
+        loginFlow.loginAs(user.getUsername(), user.getPassword());
+    }
+
+    @Then("debe entregar error invalid")
+    public void errorInvalid() throws InterruptedException{
+        Thread.sleep(2000);
+        assert loginPage.isErrorMessageDisplayed( "Your username is invalid!")
+            : "No se mostro lo requerido";
+    }
+
     
 }

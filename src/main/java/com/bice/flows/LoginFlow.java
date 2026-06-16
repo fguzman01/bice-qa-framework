@@ -1,7 +1,6 @@
 package com.bice.flows;
 
 import com.bice.pages.LoginPage;
-import com.bice.utils.actions.WaitActions;
 
 public class LoginFlow {
 
@@ -17,17 +16,8 @@ public class LoginFlow {
         System.out.println("[FLOW] Iniciando login con usuario: " + username);
         loginPage.enterUsername(username);
         loginPage.enterPassword(password);
-        loginPage.clickLogin();
-
-        if (!loginPage.isAlertPresent()) {
-            loginPage.takeScreenshot("LOGIN_COMPLETADO_" + username);
-        }
-        System.out.println("[FLOW] Login completado");
+        loginPage.clickSubmit();
     }
 
-    //Instancia de datos a ocupar
-    public void loginWithDefaultUser() {
-        loginAs("john", "demo");
-    }
     
 }

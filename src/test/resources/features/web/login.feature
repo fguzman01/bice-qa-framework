@@ -1,26 +1,29 @@
 @web
-Feature: Login ParaBank
+Feature: Login Practice Test Automation
 
   Background:
     Given el usuario navega al login
 
   Scenario: Login exitoso con credenciales válidas
-    When ingresa usuario "mngr662929" y password "AqYgEzY"
-    Then debe ver la página de cuentas
+    When ingresa usuario "student" y password "Password123"
+    Then debe ver la pagina de login succes
 
-  Scenario Outline: Login con múltiples usuarios
-    When ingresa usuario "<usuario>" y password "<password>"
-    Then debe ver la página de cuentas
+  Scenario Outline: Login con example
+    When ingresa usuario "<username>" y password "<password>"
+    Then debe ver la pagina de login succes
 
     Examples:
-      | usuario    | password |
-      | mngr662929 | AqYgEzY  |
-      | mngr662968 | AnYbYpU  |
+      | username | password    |
+      | student  | Password123 |
 
-  Scenario: Login con credenciales inválidas
-    When ingresa usuario "mngr662929" y password "wrongpass"
-    Then debe ver un mensaje de error
+  Scenario: Login exitoso con credenciales validas Dataprovider
+    When el usuario valido desde DataProvider intenta ingresar
+    Then debe ver la pagina de login succes
 
-  Scenario: Login con usuario invalido desde DataProvider
-    When el usuario invalido intenta ingresar
-    Then debe ver un mensaje de error
+  Scenario Outline: Login con credenciales invalidas
+    When ingresa usuario "<username>" y password "<password>"
+    Then debe entregar error invalid
+
+    Examples:
+      | username       | password    |
+      | incorrectUser  | Password123 |

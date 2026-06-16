@@ -1,23 +1,27 @@
 package com.bice.pages;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(name = "uid")
+    @FindBy(id = "username")
     private WebElement userField;
 
-    @FindBy(name = "password")
+    @FindBy(id = "password")
     private WebElement passwordField;
 
-    @FindBy(name = "btnLogin")
+    @FindBy(id = "submit")
     private WebElement loginButton;
 
-    @FindBy(xpath = "//marquee[contains(text(),'Welcome To Manager')]")
+    @FindBy(xpath = "//h1[contains(text(),'Logged In Successfully')]")
     private WebElement welcomeMessage;
+
+    @FindBy(xpath = "//a[contains(@href,'test-login')]")
+    private WebElement logoutButton;
+
+    @FindBy(id = "error")
+    private WebElement errorMesj; 
 
     public LoginPage() {
         super();
@@ -28,48 +32,42 @@ public class LoginPage extends BasePage {
         typeText(userField, username);
     }
 
-    // Ingresar contraseña
+    // Ingresar password 
     public void enterPassword(String password) {
         typeText(passwordField, password);
     }
 
-    // Click boton del login
-    public void clickLogin() {
+    //Click en boton submit
+    public void clickSubmit (){
         clickElement(loginButton);
     }
 
-    //Valida login exitoso
-    public boolean isLoginSuccessful() {
-        try {
-            return isDisplayed(welcomeMessage);
-        } catch (Exception e) {
+    //CLick logout button
+    public void logOut(){
+        clickElement(logoutButton );
+    }
+
+    public boolean isLoginSuccesful (){
+        return isDisplayed(welcomeMessage);
+    }
+
+    public String getErrorMessage() {
+        return getText(errorMesj);
+    }
+
+    public boolean isErrorMessageDisplayed(String expectText){
+        try{
+
+            String actual = getErrorMessage();
+            System.out.println("[CHECK] Mensaje de error: " + actual);
+            return actual.contains(expectText);
+
+        }catch (Exception e){
             return false;
         }
+
+        
     }
 
-    //Captura alerta al fallar login
-    public String getAlertMessage() {
-        try {
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-            String message = alert.getText();
-            Thread.sleep(2000); // 2 segundos para verlo
-            alert.accept();
-            return message;
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
-    public boolean isAlertPresent() {
-        try {
-            driver.switchTo().alert();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public boolean isLoginPageDisplayed() {
-        return isDisplayed(userField);
-    }
+    
 }
