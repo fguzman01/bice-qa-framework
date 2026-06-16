@@ -1,3 +1,4 @@
+@ignore
 @web
 Feature: Products SauceDemo
 

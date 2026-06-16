@@ -10,9 +10,16 @@ public class ProductsPage extends BasePage{
 
     @FindBy(xpath = "//*[@data-test='shopping-cart-badge']")
     private WebElement cartBadge;
+
+    @FindBy(css = "[data-test='shopping-cart-link']")
+    private WebElement cartLink;
     
     public ProductsPage(){
         super();
+    }
+
+    public void goToCart() {
+        clickElement(cartLink);
     }
 
     // Recorrer caja de productos y selecionar segun nombre
