@@ -4,10 +4,11 @@ import com.bice.config.ConfigManager;
 import com.bice.config.WebDriverFactory;
 import com.bice.data.DataProvider;
 import com.bice.data.UserData;
-import com.bice.flows.LoginFlow;
+//import com.bice.flows.LoginFlow;
 import com.bice.pages.LoginPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
@@ -15,14 +16,14 @@ import io.cucumber.java.Scenario;
 
 public class LoginSteps {
 
-    private LoginFlow loginFlow;
+    //private LoginFlow loginFlow;
     private LoginPage loginPage;
 
     // Instanciar flos previo
     @Before
     public void setUp() {
         WebDriverFactory.initDriver();
-        loginFlow = new LoginFlow();
+        //loginFlow = new LoginFlow();
         loginPage = new LoginPage();
     }
 
@@ -40,32 +41,36 @@ public class LoginSteps {
         loginPage.navigateTo(ConfigManager.getInstance().getBaseUrl());
     }
 
+    @When ("usuario click en mensaje entendido")
+    public void clcikMensajeEntendido (){
+        loginPage.clickMensaje();
+
+    }
+
+    @And ("usuario click en ya tengo cuenta")
+    public void clickEnMensajeCuenta (){
+        loginPage.clcikTengoCuenta();
+
+    }
+    
     @When("ingresa usuario {string} y password {string}")
-    public void ingresaUsuarioYPassword(String username, String password) {
-        loginFlow.loginAs(username, password);
+    public void ingresaUsuarioYPassword(String mail , String password) {
+        //loginFlow.loginAs(username, password);
+        loginPage.inputMail(mail);
+        loginPage.inputPass(password);
     }
 
-    @When ("el usuario invalido intenta ingresar")
-    public void elUsuarioInvalidoIntentaIngresar(){
-        //Instancia data provider
-        UserData user = DataProvider.getUser("invalidUser");
-        System.out.println("[DATA] Usuario desde JSON: " + user.getUsername());
-        loginFlow.loginAs(user.getUsername(), user.getPassword());
-
+    @And("click en submit")
+    public void clickSubmit (){
+        loginPage.clickIniciarsesion();
     }
 
+    @Then("debe entregar error de credenciales")
+    public void mensajeErrorCredenciales (){
 
-    @Then("debe ver la página de cuentas")
-    public void debeVerLaPaginaDeCuentas() {
-        assert loginPage.isLoginSuccessful() 
-            : "Se esperaba mensaje de bienvenida pero no apareció";
+        assert loginPage.mensajeErroDisponible()
+            : "no entrega error";
+
     }
-
-    @Then("debe ver un mensaje de error")
-    public void debeVerUnMensajeDeError() {
-        String alertMsg = loginPage.getAlertMessage();
-        assert alertMsg.contains("not valid") 
-            : "Se esperaba 'not valid' pero se obtuvo: " + alertMsg;
-}
     
 }

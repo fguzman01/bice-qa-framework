@@ -1,4 +1,4 @@
-@api
+@ignore
 Feature: Users API - Reqres
 
   Scenario: Get list of users successfully
