@@ -9,6 +9,7 @@ mvn test -Dtest=CucumberRunner
 
 #solo karate
 mvn test -Dtest=KarateRunner
+mvn test -Dtest=KarateRunner -Dkarate.options="--tags @api"
 
 # Todos juntos
 mvn test
